@@ -1,4 +1,8 @@
+import java.util.Calendar;
+
 public class BankAccount {
+    Calendar calendar = Calendar.getInstance();
+
     private double balance;
 
     private int accountNum;
@@ -60,7 +64,7 @@ public class BankAccount {
 
     private void statementMod(double change, String type)
     {
-        String transaction = String.format("$%.2f %9s $%.2f In Account\n", change, type, balance);
+        String transaction = String.format(calendar.getTime() + ": %-10s $%-9.2f In Account: $%.2f  \n", type + ":", change, balance);
         receipt.append(transaction);
     }
 }
