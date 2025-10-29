@@ -17,6 +17,10 @@ public class BankAccount {
         balance = 0.0;
     }
 
+    /**
+     * 
+     * @param amount Constructor parameter for starting balance.
+     */
     public BankAccount(double amount)
     {
         balance = amount;
@@ -32,6 +36,7 @@ public class BankAccount {
         }
         else
         {
+            errorMod (amount, "Cannot deposit $%.2f  Deposit amount negative.");
             return -1;
         }
     }
@@ -45,10 +50,15 @@ public class BankAccount {
                 statementMod(amount, "Withdrawn");
                 return 1;
             }
-            else
+            else if (amount < 0)
             {
-                return -1;
+                errorMod (amount, "Cannot withdraw $%.2f Withdrawal amount negative.");
             }
+            else if (balance < amount)
+            {
+                errorMod(amount, "Cannot withdraw $%.2f Insufficient funds.");
+            }
+            return -1;
         
         
     }
@@ -65,6 +75,12 @@ public class BankAccount {
     private void statementMod(double change, String type)
     {
         String transaction = String.format(calendar.getTime() + ": %-10s $%-9.2f In Account: $%.2f  \n", type + ":", change, balance);
+        receipt.append(transaction);
+    }
+
+    private void errorMod (double change, String error)
+    {
+        String transaction = String.format(calendar.getTime() + ": Error: " + error + "\n", change);
         receipt.append(transaction);
     }
 }
