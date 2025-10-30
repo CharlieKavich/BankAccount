@@ -110,7 +110,8 @@ public class BankAccount {
     }
 
     /**
-     * errorMod for failed transactions
+     * Appends error transactions to the receipt / bank statement
+     * Please not this isn't an error message, it simply records failed transactions on the receipt.
      * @param change attempted change in balance
      * @param error message explaining type of error (insufficient funds or negative amount)
      */
